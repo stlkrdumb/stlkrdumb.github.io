@@ -14,6 +14,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "rai.dev | Portfolio",
   description: "Crafting digital experiences. Frontend, Backend, and Performance optimization.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

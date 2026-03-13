@@ -8,10 +8,13 @@ export default function Home() {
     <div className="bg-transparent text-foreground font-sans selection:bg-black/10 dark:selection:bg-white/10 transition-colors duration-300">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50">
-        <div className="w-full px-6 h-16 flex items-center justify-between">
-          <span className="font-bold text-xl tracking-tighter hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors cursor-pointer" onClick={() => window.fullpage_api.moveTo('hero')}>
-            stlkrdumb
-          </span>
+        <div className="w-full px-6 h-16 md:h-24 flex items-center justify-between">
+          <img
+            src="/logo.svg"
+            alt="stlkrdumb"
+            className="h-8 md:h-16 w-auto cursor-pointer opacity-90 hover:opacity-60 transition-opacity"
+            onClick={() => window.fullpage_api.moveTo('hero')}
+          />
           <div className="flex items-center gap-2">
             <button onClick={() => window.fullpage_api.moveTo('about')} title="About" className="h-9 w-9 flex items-center justify-center rounded-md text-zinc-400 hover:text-white hover:bg-white/10 transition-all duration-200">
               <User className="w-[1.1rem] h-[1.1rem]" />
@@ -145,14 +148,11 @@ export default function Home() {
                     </div>
                     
                     <div className="flex gap-6">
-                      <a href="#" className="h-16 w-16 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 text-zinc-400 hover:text-white transition-all hover:scale-110">
+                      <a href="https://github.com/stlkrdumb" className="h-16 w-16 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 text-zinc-400 hover:text-white transition-all hover:scale-110">
                         <Github className="w-8 h-8" />
                       </a>
-                      <a href="#" className="h-16 w-16 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 text-zinc-400 hover:text-white transition-all hover:scale-110">
+                      <a href="https://x.com/nurairstalk" className="h-16 w-16 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 text-zinc-400 hover:text-white transition-all hover:scale-110">
                         <Twitter className="w-8 h-8" />
-                      </a>
-                      <a href="#" className="h-16 w-16 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 text-zinc-400 hover:text-white transition-all hover:scale-110">
-                        <Linkedin className="w-8 h-8" />
                       </a>
                     </div>
                   </div>
