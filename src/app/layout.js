@@ -16,22 +16,13 @@ export const metadata = {
   description: "Crafting digital experiences. Frontend, Backend, and Performance optimization.",
 };
 
-import { ThemeProvider } from "../components/theme-provider";
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );
