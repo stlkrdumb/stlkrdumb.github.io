@@ -29,3 +29,9 @@ body {
 .fp-watermark {
   display: none !important;
 }
+
+/* Scroll indicator bounce animation */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.6; }
+  50%       { transform: translateX(-50%) translateY(8px); opacity: 1;   }
+}
