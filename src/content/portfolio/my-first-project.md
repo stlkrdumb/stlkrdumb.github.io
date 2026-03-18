@@ -1,6 +1,6 @@
 ---
-title: 'My First Project'
-description: 'A brief description of this awesome portfolio project.'
+title: 'Stlkrdumb Github Page'
+description: 'First and full of experience building my personal website.'
 pubDate: 'Jul 08 2024'
 heroImage: '../../assets/blog-placeholder-about.jpg'
 techStack: ['Astro', 'Tailwind', 'React']
