@@ -1,0 +1,54 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`Search | ${SITE_TITLE}`} description={SITE_DESCRIPTION} ogImageUrl="/og-default.png" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    
+    <main class="flex-1">
+      <div class="max-w-3xl mx-auto px-4 py-12">
+        <header class="mb-12">
+          <h1 class="text-3xl font-medium tracking-tight mb-4">Search</h1>
+          <p class="text-neutral-600 dark:text-neutral-400">
+            Find what you're looking for across all posts.
+          </p>
+        </header>
+        
+        <div id="search" class="w-full">
+          <noscript>
+            <p class="text-neutral-600 dark:text-neutral-400">JavaScript is required to use search.</p>
+          </noscript>
+        </div>
+      </div>
+    </main>
+    
+    <Footer />
+    
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+    <script is:inline src="/pagefind/pagefind-ui.js"></script>
+    <script is:inline>
+      document.addEventListener('astro:page-load', function() {
+        var searchContainer = document.getElementById('search');
+        if (!searchContainer) return;
+        
+        if (typeof PagefindUI !== 'undefined') {
+          new PagefindUI({
+            element: '#search',
+            showSubResults: true,
+            showImages: false,
+          });
+        } else {
+          searchContainer.innerHTML = '<div class="p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg text-center"><p class="text-neutral-600 dark:text-neutral-400">Search will be available after the site is built. Run <code class="bg-neutral-200 dark:bg-neutral-700 px-1 rounded">npm run build</code> to generate the search index.</p></div>';
+        }
+      });
+    </script>
+  </body>
+</html>

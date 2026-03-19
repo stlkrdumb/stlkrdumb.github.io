@@ -66,11 +66,6 @@ const organizationSchema = {
 
 <ClientRouter />
 
-<!-- Google Fonts - Inter -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
@@ -123,3 +118,8 @@ const organizationSchema = {
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+<!-- Plausible Analytics: Privacy-first, no cookies, GDPR compliant -->
+{import.meta.env.PROD && (
+  <script defer data-domain="stlkrdumb.github.io" src="https://plausible.io/js/script.js"></script>
+)}

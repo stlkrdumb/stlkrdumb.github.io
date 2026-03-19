@@ -1,0 +1,63 @@
+---
+import type { Heading } from '../utils/toc';
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+if (!headings || headings.length === 0) {
+  return null;
+}
+---
+
+<nav class="toc hidden lg:block sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto">
+  <h2 class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-3 uppercase tracking-wider">
+    On this page
+  </h2>
+  <ul class="space-y-2 text-sm">
+    {headings.map((heading) => (
+      <li class={heading.depth === 3 ? 'ml-4' : ''}>
+        <a
+          href={`#${heading.slug}`}
+          class="block py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors border-l-2 border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 pl-3"
+        >
+          {heading.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  function updateActiveHeading() {
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    const tocLinks = document.querySelectorAll('.toc a');
+    
+    let currentHeading = null;
+    
+    headings.forEach((heading) => {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top <= 100) {
+        currentHeading = heading;
+      }
+    });
+    
+    tocLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href && currentHeading && href === `#${currentHeading.id}`) {
+        link.classList.add('text-black', 'dark:text-white', 'border-black', 'dark:border-white');
+        link.classList.remove('text-neutral-600', 'dark:text-neutral-400', 'border-transparent');
+      } else {
+        link.classList.remove('text-black', 'dark:text-white', 'border-black', 'dark:border-white');
+        link.classList.add('text-neutral-600', 'dark:text-neutral-400', 'border-transparent');
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    updateActiveHeading();
+    window.addEventListener('scroll', updateActiveHeading, { passive: true });
+  });
+</script>

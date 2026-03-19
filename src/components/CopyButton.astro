@@ -1,0 +1,110 @@
+---
+/**
+ * CopyButton Component
+ * Adds copy-to-clipboard functionality to code blocks.
+ * This component injects a client-side script that adds copy buttons
+ * to all <pre> elements in the document.
+ */
+---
+
+<style>
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10;
+  }
+
+  .dark .copy-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  pre:hover .copy-button {
+    opacity: 1;
+  }
+
+  .copy-button:hover {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .dark .copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .copy-button.copied {
+    background: #22c55e;
+  }
+
+  .dark .copy-button.copied {
+    background: #22c55e;
+  }
+</style>
+
+<script>
+  /**
+   * Initialize copy buttons for all code blocks.
+   * This runs on page load and after Astro view transitions.
+   */
+  function initCopyButtons() {
+    const codeBlocks = document.querySelectorAll('pre');
+    
+    codeBlocks.forEach((pre) => {
+      // Skip if already has a copy button
+      if (pre.querySelector('.copy-button')) return;
+      
+      // Make pre relatively positioned for absolute button
+      const originalPosition = window.getComputedStyle(pre).position;
+      if (originalPosition === 'static' || !originalPosition) {
+        (pre as HTMLElement).style.position = 'relative';
+      }
+      
+      // Create copy button
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.textContent = 'Copy';
+      button.type = 'button';
+      
+      button.addEventListener('click', async () => {
+        const codeElement = pre.querySelector('code') || pre;
+        const code = codeElement.textContent || '';
+        
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          button.textContent = 'Failed';
+          
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        }
+      });
+      
+      pre.appendChild(button);
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initCopyButtons);
+  
+  // Re-initialize after Astro view transitions
+  document.addEventListener('astro:page-load', initCopyButtons);
+</script>
