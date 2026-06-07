@@ -134,6 +134,9 @@
 | ✅ I1 | `src/utils/og-image.ts` | Redesigned OG images for all pages — Spectral serif, yellow accent, full-width layout with title text on image | Done |
 | ✅ I2 | `src/components/Header.astro` | Minimal topbar nav — edge-bar style, spectral font, accent hover indicator, refined logo sizing (`h-10`) | Done |
 | ✅ I3 | `src/components/Footer.astro` | Simplified single-row footer grid, refined social links, consistent sizing (`h-8`) | Done |
+| ✅ I4 | `public/CNAME` | Custom domain file — tells GitHub Pages to serve on `byrai.xyz` | Done |
+| ✅ I5 | `public/404.html` | Editorial 404 page matching site aesthetic (Spectral serif, yellow accent) | Done |
+| ✅ I6 | `public/_redirects` | Reference file with 301 redirect patterns for future hosting switch | Done |
 
 **OG image design:** Professional article preview images.
 - Spectral serif title (48px)
@@ -152,13 +155,26 @@
 
 ---
 
+## Phase 3.5 — Manual Steps (user action required)
+
+| # | Action | Details | Status |
+|---|--------|---------|--------|
+| ⬜ M1 | DNS setup | Point `byrai.xyz` DNS to GitHub Pages: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` | Not started |
+| ⬜ M2 | GitHub Pages custom domain | Settings → Pages → Custom domain → type `byrai.xyz` → Save (GH auto-requests SSL cert) | Not started |
+| ⬜ M3 | DNS verification | Wait for DNS propagation (usually 5-30 min, up to 48h) — GH Pages shows green checkmark when ready | Not started |
+| ⬜ M4 | Plausible.io | Create property at plausible.io for `byrai.xyz`, update script if using self-hosted (currently uses plausible.io CDN) | Not started |
+| ⬜ M5 | 301 redirects (old → new) | Option A: Cloudflare proxy with page rules for `stlkrdumb.github.io` → `byrai.xyz` | Not started |
+| ⬜ M6 | Search engine submission | Submit `https://byrai.xyz` to Google Search Console + Bing Webmaster Tools | Not started |
+
+---
+
 ## Summary
 
 - **Phase 1:** 7/8 items done — remaining: favicon review (user skipped)
 - **Phase 2 (Blog):** 4/4 items done ✅
 - **Phase 2.5 (Portfolio/Home):** 8/8 items done ✅
-- **Phase 3 (Infra/Polish):** 3/3 items done ✅
-- **Phase 3 (Manual Infra Steps):** ⬜ Not started — DNS, GitHub Pages custom domain, Plausible.io
+- **Phase 3 (Infra Code & Files):** 6/6 items done ✅
+- **Phase 3.5 (Manual Infra Steps):** ⬜ Not started — DNS, GitHub Pages custom domain, Plausible.io
 - **Phase 4:** 0/3 done — README update, repo rename, social profiles
 
 ---
@@ -170,15 +186,16 @@
 | Phase 1 — Code & Assets | ✅ ~87% |
 | Phase 2 — Blog Pages | ✅ Complete |
 | Phase 2.5 — Portfolio & Homepage | ✅ Complete |
-| Phase 3 — Infra Code (OG/Header/Footer) | ✅ Complete |
-| Phase 3 — Manual Infra (DNS/GitHub/Plausible) | ⬜ Not started |
+| Phase 3 — Infra Code & Files | ✅ Complete |
+| Phase 3.5 — Manual Infra (DNS/GitHub/Plausible) | ⬜ Not started |
 | Phase 4 — Housekeeping | ⬜ Pending |
 
 ## Next steps
 
-1. **Phase 3 (Manual):** Setup DNS for `byrai.xyz`, configure GitHub Pages custom domain, create Plausible.io property, add CNAME file, set up 301 redirects
-2. **Phase 4:** Update `README.md`, rename repo to `byrai.xyz`, update social profiles
-3. Deploy and verify live site at `https://byrai.xyz`
+1. **Phase 3.5 (Manual):** Setup DNS for `byrai.xyz`, configure GitHub Pages custom domain, create Plausible.io property
+2. **Phase 3.5 Optionals:** 301 redirects via Cloudflare, search engine submission (GSC + Bing)
+3. **Phase 4:** Update `README.md`, rename repo to `byrai.xyz`, update social profiles
+4. Deploy and verify live site at `https://byrai.xyz`
 
 ---
 
