@@ -95,12 +95,71 @@
 
 ---
 
+## Phase 2.5 — Portfolio & Homepage Redesign (bonus)
+
+| # | File | Change | Status |
+|---|------|--------|--------|
+| ✅ P1 | `src/pages/index.astro` | Cinematic asymmetric hero + featured project preview, Selected Work catalog with horizontal list, Recent Writing 2-column grid | Done |
+| ✅ P2 | `src/pages/portfolio/index.astro` | Editorial gallery — alternating layout rows, numbered overlays, large imagery, tech stack pills | Done |
+| ✅ P3 | `src/layouts/PortfolioPost.astro` | Spectral serif title, editorial reading room layout, accent active-link TOC sidebar | Done |
+| ✅ P4 | `src/content/portfolio/nexus-protocol.md` | Fake portfolio entry — DeFi aggregator (Rust/Solidity) | Done |
+| ✅ P5 | `src/content/portfolio/synthwave-cli.md` | Fake portfolio entry — CLI scaffolding tool (Go) | Done |
+| ✅ P6 | `src/content/portfolio/aether-dashboard.md` | Fake portfolio entry — infra monitoring dashboard (Astro/D3.js) | Done |
+| ✅ P7 | `src/content/portfolio/forge-build-system.md` | Fake portfolio entry — zero-config build system (Rust/WASM) | Done |
+| ✅ P8 | `src/assets/portfolio/*.jpg` | 4 placeholder hero images for portfolio entries | Done |
+
+**Homepage design:** Editorial showcase experience.
+- **Hero:** Cinematic asymmetric split — typographic statement left, featured project image right with grayscale→color hover transition
+- **Selected Work:** Horizontal catalog with numbered entries (YYMM format), large serif titles, muted descriptions, tech stack pills right-aligned
+- **Writing:** Two-column recent posts grid with dates and reading times
+- **Navigation edge-bar:** Minimal topbar nav with accent-colored "home" indicator
+
+**Portfolio page design:** Editorial gallery spread.
+- **Gallery rows:** Alternating image/text layouts (even: text-left/image-right, odd: reversed), large imagery with subtle zoom hover effect
+- **Typography:** Large Spectral serif titles, muted descriptions, bordered tech stack pills
+- **Numbering:** Sequential numbering overlay on imagery (01, 02, 03...)
+- **CTA:** "View project" text with animated arrow indicator on hover
+
+**Portfolio post design:** Immersive editorial reading room.
+- **Header:** Large Spectral serif title + date row + description excerpt
+- **Hero image:** Full-width bordered frame (2:1 aspect ratio)
+- **Body:** Custom prose typography, accent pull quotes, numbered TOC sidebar
+
+---
+
+## Phase 3 — Infrastructure & Polish
+
+| # | File | Change | Status |
+|---|------|--------|--------|
+| ✅ I1 | `src/utils/og-image.ts` | Redesigned OG images for all pages — Spectral serif, yellow accent, full-width layout with title text on image | Done |
+| ✅ I2 | `src/components/Header.astro` | Minimal topbar nav — edge-bar style, spectral font, accent hover indicator, refined logo sizing (`h-10`) | Done |
+| ✅ I3 | `src/components/Footer.astro` | Simplified single-row footer grid, refined social links, consistent sizing (`h-8`) | Done |
+
+**OG image design:** Professional article preview images.
+- Spectral serif title (48px)
+- Yellow accent top bar + description text block
+- Full-width layout with subtitle and date metadata
+
+**Header redesign:** Minimal editorial masthead.
+- Fixed topbar with wide `max-w-[1400px]` container
+- "byrai" in Spectral serif (h-10 logo)
+- Minimal nav links with accent color hover indicator
+- Responsive hamburger for mobile
+
+**Footer redesign:** Clean one-row layout.
+- Single flex row: copyright left, social icons right
+- Refined sizing and spacing consistent with new aesthetic
+
+---
+
 ## Summary
 
-- **Phase 1:** 6/8 items done — remaining: favicon review, logo already done by user
-- **Phase 2:** 0/1 done — historical blog mention pending your call
-- **Phase 3:** 0/6 done — these are manual infra steps (DNS, GitHub Pages, Plausible, redirects)
-- **Phase 4:** 0/3 done — optional polish items
+- **Phase 1:** 7/8 items done — remaining: favicon review (user skipped)
+- **Phase 2 (Blog):** 4/4 items done ✅
+- **Phase 2.5 (Portfolio/Home):** 8/8 items done ✅
+- **Phase 3 (Infra/Polish):** 3/3 items done ✅
+- **Phase 3 (Manual Infra Steps):** ⬜ Not started — DNS, GitHub Pages custom domain, Plausible.io
+- **Phase 4:** 0/3 done — README update, repo rename, social profiles
 
 ---
 
@@ -108,10 +167,18 @@
 
 | Phase | Progress |
 |-------|----------|
-| Phase 1 — Code & Assets | ✅ 75% |
-| Phase 2 — Blog Content | ⬜ Pending decision |
-| Phase 3 — Infrastructure | ⬜ Not started |
-| Phase 4 — Housekeeping | ⬜ Not started |
+| Phase 1 — Code & Assets | ✅ ~87% |
+| Phase 2 — Blog Pages | ✅ Complete |
+| Phase 2.5 — Portfolio & Homepage | ✅ Complete |
+| Phase 3 — Infra Code (OG/Header/Footer) | ✅ Complete |
+| Phase 3 — Manual Infra (DNS/GitHub/Plausible) | ⬜ Not started |
+| Phase 4 — Housekeeping | ⬜ Pending |
+
+## Next steps
+
+1. **Phase 3 (Manual):** Setup DNS for `byrai.xyz`, configure GitHub Pages custom domain, create Plausible.io property, add CNAME file, set up 301 redirects
+2. **Phase 4:** Update `README.md`, rename repo to `byrai.xyz`, update social profiles
+3. Deploy and verify live site at `https://byrai.xyz`
 
 ---
 
