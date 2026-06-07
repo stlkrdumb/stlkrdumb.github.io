@@ -1,3 +1,7 @@
+# agents folder
+.agents
+.agent
+
 # build output
 dist/
 # generated types

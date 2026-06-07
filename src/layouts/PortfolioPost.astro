@@ -1,9 +1,8 @@
 ---
-import { Image } from 'astro:assets';
+
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'portfolio'>['data'];
@@ -16,88 +15,72 @@ const { title, description, pubDate, updatedDate, heroImage, techStack } = Astro
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <!-- Reading Progress Bar -->
-    <div id="reading-progress" class="fixed top-0 left-0 h-1 w-full bg-black dark:bg-white z-50 origin-left scale-x-0 transition-transform duration-75"></div>
+  <body class="min-h-screen flex flex-col bg-background text-foreground">
     <Header />
-    
-    <main class="flex-1">
-      <article class="max-w-3xl mx-auto px-4 py-12">
-        <div class="space-y-8">
-          <!-- Header -->
-          <header class="space-y-4">
-            <div class="flex items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
-              <FormattedDate date={pubDate} />
-              {updatedDate && (
-                <span class="text-neutral-400">
-                  (Updated: <FormattedDate date={updatedDate} />)
-                </span>
-              )}
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-medium tracking-tight leading-tight">
-              {title}
-            </h1>
-            <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              {description}
-            </p>
-            {techStack && techStack.length > 0 && (
-              <div class="flex flex-wrap gap-2 pt-2">
-                {techStack.map((tech) => (
-                  <span class="px-3 py-1 bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 text-sm font-medium rounded-full">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-          </header>
 
-          <!-- Hero Image -->
-          {heroImage && (
-            <div class="overflow-hidden rounded-lg">
-              <Image width={1020} height={510} src={heroImage} alt="" class="w-full" />
-            </div>
-          )}
+    <main class="flex-1 flex flex-col">
 
-          <!-- Content -->
-          <div class="prose dark:prose-invert prose-lg max-w-none">
-            <slot />
-          </div>
+      <!-- Page header — minimal -->
+      <section class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 pt-24 pb-8 sm:pt-32 sm:pb-12">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-muted block mb-3">{pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+          <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl leading-tight tracking-tight mb-4">{title}</h1>
+          <p class="text-muted text-lg max-w-2xl leading-relaxed">{description}</p>
         </div>
-      </article>
+      </section>
+
+      <!-- Tech stack -->
+      {techStack && techStack.length > 0 && (
+        <section class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 pb-12">
+          <div class="flex flex-wrap gap-2">
+            {techStack.map((tech) => (
+              <span class="font-mono text-[10px] uppercase tracking-widest text-muted px-4 py-2 border border-border">{tech}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Divider -->
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16">
+        <hr class="border-border" />
+      </div>
+
+      <!-- Hero image — full width within container -->
+      {heroImage && (
+        <section class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 py-16 sm:py-20">
+          <figure class="relative overflow-hidden border border-border aspect-[2/1]">
+            <img
+              src={typeof heroImage === 'string' ? heroImage : (heroImage as any).src}
+              alt=""
+              width="1200"
+              height="600"
+              class="w-full h-full object-cover"
+            />
+          </figure>
+        </section>
+      )}
+
+      <!-- Divider -->
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16">
+        <hr class="border-border" />
+      </div>
+
+      <!-- Article body — editorial typography -->
+      <section class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 py-16 sm:py-24">
+        <article class="content-body max-w-none prose prose-lg">
+          <slot />
+        </article>
+      </section>
+
+      <!-- End marker -->
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 pb-20 sm:pb-32 pt-12 border-t border-border flex items-center justify-between">
+        <span class="font-sans text-xs uppercase tracking-[0.2em] text-muted">End of project</span>
+        <a href="/portfolio" class="font-mono text-xs tabular-nums text-muted hover:text-accent transition-colors duration-300">Back to portfolio →</a>
+      </div>
+
     </main>
-    
+
     <Footer />
-    
-    <script is:inline>
-      document.addEventListener('astro:page-load', () => {
-        const progressBar = document.getElementById('reading-progress');
-        if (!progressBar) return;
 
-        if (window.readingProgressHandler) {
-          window.removeEventListener('scroll', window.readingProgressHandler);
-        }
-        
-        let ticking = false;
-        
-        const updateProgress = () => {
-          const totalHeight = document.body.scrollHeight - window.innerHeight;
-          const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
-          progressBar.style.transform = `scaleX(${progress})`;
-          ticking = false;
-        };
-
-        window.readingProgressHandler = () => {
-          if (!ticking) {
-            window.requestAnimationFrame(updateProgress);
-            ticking = true;
-          }
-        };
-
-        window.addEventListener('scroll', window.readingProgressHandler, { passive: true });
-        
-        // Initial setup
-        updateProgress();
-      });
-    </script>
   </body>
 </html>

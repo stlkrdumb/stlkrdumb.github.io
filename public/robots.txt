@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://stlkrdumb.github.io/sitemap-index.xml
+Sitemap: https://byrai.xyz/sitemap-index.xml
 
 # Disallow common non-content paths
 Disallow: /api/

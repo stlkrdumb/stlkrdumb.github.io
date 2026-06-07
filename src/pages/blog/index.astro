@@ -4,11 +4,14 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const totalPosts = posts.length;
+const firstDate = posts[posts.length - 1]?.data.pubDate;
 ---
 
 <!doctype html>
@@ -16,42 +19,88 @@ const posts = (await getCollection('blog')).sort(
   <head>
     <BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} ogImageUrl="/og-default.png" />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col bg-background text-foreground">
+
     <Header />
-    
-    <main class="flex-1">
-      <div class="max-w-3xl mx-auto px-4 py-12">
-        <header class="mb-12">
-          <h1 class="text-3xl font-medium tracking-tight mb-4">Blog</h1>
-          <p class="text-neutral-600 dark:text-neutral-400">
-            Thoughts, tutorials, and things I've learned.
-          </p>
-        </header>
-        
-        <div class="space-y-10">
-          {
-            posts.map((post) => (
-              <article class="group">
-                <a href={`/blog/${post.id}/`} class="block">
-                  <div class="space-y-3">
-                    <div class="flex items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
-                      <FormattedDate date={post.data.pubDate} />
-                    </div>
-                    <h2 class="text-xl font-medium group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+
+    <main class="flex-1 flex flex-col pt-24 pb-32">
+
+      <!-- Page header — editorial catalog title -->
+      <section class="max-w-5xl mx-auto w-full px-6 md:px-10 mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border pb-8">
+          <div>
+            <span class="font-serif text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none">Blog</span>
+            <p class="text-muted mt-4 max-w-sm text-base leading-relaxed">{SITE_DESCRIPTION}</p>
+          </div>
+          <div class="flex flex-col items-start sm:items-end gap-1 shrink-0">
+            <span class="font-mono text-3xl font-medium tabular-nums">{totalPosts}</span>
+            <span class="text-xs uppercase tracking-[0.2em] text-muted">published articles</span>
+            {firstDate && (
+              <span class="font-mono text-xs text-muted tabular-nums">
+                since {firstDate.toLocaleDateString('en-US', { year: 'numeric' })}
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <!-- Article catalog list -->
+      <section class="max-w-5xl mx-auto w-full px-6 md:px-10">
+        <div class="divide-y divide-border">
+
+          {posts.map((post, index) => (
+            <article
+              class="group py-8 first:pt-0"
+              style={`animation: fade-in-up 0.7s ease-out forwards; animation-delay: ${0.1 + index * 0.06}s; opacity: 0;`}
+            >
+              <a href={`/blog/${post.id}/`} class="block">
+                <div class="grid grid-cols-[40px_1fr_auto] sm:grid-cols-[60px_1fr_auto] gap-4 sm:gap-8 items-start">
+
+                  <!-- Numbered marker -->
+                  <div class="pt-1">
+                    <span class="font-mono text-sm tabular-nums text-muted group-hover:text-accent transition-colors duration-300">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="space-y-2 min-w-0">
+                    <h2 class="font-serif text-xl md:text-2xl leading-snug group-hover:text-accent transition-colors duration-300 truncate sm:truncate">
                       {post.data.title}
                     </h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p class="text-muted leading-relaxed max-w-2xl text-sm line-clamp-2">
                       {post.data.description}
                     </p>
                   </div>
-                </a>
-              </article>
-            ))
-          }
+
+                  <!-- Date — right aligned -->
+                  <div class="shrink-0 pt-1 hidden sm:block">
+                    <FormattedDate date={post.data.pubDate} class="font-mono text-xs tabular-nums text-muted whitespace-nowrap" />
+                  </div>
+
+                </div>
+              </a>
+            </article>
+          ))}
+
         </div>
-      </div>
+      </section>
+
+      <!-- Mobile date — shown only on small screens -->
+      <section class="max-w-5xl mx-auto w-full px-6 md:px-10 sm:hidden mt-4">
+        <div class="divide-y divide-border">
+          {posts.map((post) => (
+            <div class="py-3 flex items-center justify-between text-xs font-mono tabular-nums text-muted">
+              <FormattedDate date={post.data.pubDate} />
+              <span>{post.data.readingTime || '~5 min'} read</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
     </main>
-    
+
     <Footer />
+
   </body>
 </html>

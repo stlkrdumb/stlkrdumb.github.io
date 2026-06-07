@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://stlkrdumb.github.io',
+  site: 'https://byrai.xyz',
   integrations: [mdx(), sitemap()],
 
   fonts: [
@@ -17,6 +17,13 @@ export default defineConfig({
       name: 'Inter',
       cssVariable: '--font-inter',
       weights: [400, 500, 600],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Spectral',
+      cssVariable: '--font-spectral',
+      weights: [400, 500, 600, 700],
       subsets: ['latin'],
     },
   ],

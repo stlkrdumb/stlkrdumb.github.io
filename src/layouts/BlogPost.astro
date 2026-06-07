@@ -37,7 +37,7 @@ const articleSchema = {
   "dateModified": (updatedDate || pubDate).toISOString(),
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": new URL(Astro.url.pathname, SITE_URL).toString()
+    "id": new URL(Astro.url.pathname, SITE_URL).toString()
   },
   "image": heroImage ? new URL(heroImage.src, SITE_URL).toString() : new URL(ogImageUrl, SITE_URL).toString()
 };
@@ -49,93 +49,88 @@ const articleSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <!-- Reading Progress Bar -->
-    <div id="reading-progress" class="fixed top-0 left-0 h-1 w-full bg-black dark:bg-white z-50 origin-left scale-x-0 transition-transform duration-75"></div>
+  <body class="min-h-screen flex flex-col bg-background text-foreground">
+
     <Header />
-    
-    <main class="flex-1">
-      <article class="max-w-3xl mx-auto px-4 py-12">
-        <div class="space-y-8">
-          <!-- Header -->
-          <header class="space-y-4">
-            <div class="flex items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400 flex-wrap">
-              <FormattedDate date={pubDate} />
-              {updatedDate && (
-                <span class="text-neutral-400">
-                  (Updated: <FormattedDate date={updatedDate} />)
-                </span>
-              )}
-              {readingTime && (
-                <span class="text-neutral-400">
-                  · {readingTime}
-                </span>
-              )}
-            </div>
-            <h1 class="text-3xl sm:text-4xl font-medium tracking-tight leading-tight">
-              {title}
-            </h1>
-            <p class="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+
+    <main class="flex-1 flex justify-center">
+
+      <!-- Article content — centered column -->
+      <article class="w-full max-w-3xl px-6 md:px-10 py-12 sm:py-16 lg:py-20">
+
+        <!-- Header section -->
+        <header class="mb-16 space-y-6">
+
+          <!-- Date & reading time -->
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-mono tabular-nums text-muted">
+            <FormattedDate date={pubDate} />
+            {updatedDate && (
+              <>
+                <span class="hidden sm:inline">·</span>
+                <span>Updated <FormattedDate date={updatedDate} /></span>
+              </>
+            )}
+            {readingTime && (
+              <>
+                <span class="hidden sm:inline">·</span>
+                <span>{readingTime}</span>
+              </>
+            )}
+          </div>
+
+          <!-- Title -->
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] leading-[1.15] tracking-tight">
+            {title}
+          </h1>
+
+          <!-- Description / excerpt -->
+          {description && (
+            <p class="text-lg text-muted leading-relaxed max-w-2xl italic font-sans">
               {description}
             </p>
-          </header>
-
-          <!-- Hero Image -->
-          {heroImage && (
-            <div class="overflow-hidden rounded-lg">
-              <Image width={1020} height={510} src={heroImage} alt="" class="w-full" />
-            </div>
           )}
 
-          <!-- Content -->
-          <div class="prose dark:prose-invert prose-lg max-w-none">
-            <slot />
-          </div>
-        </div>
-        
-        <!-- Table of Contents (desktop sidebar) -->
-        {headings.length > 0 && (
-          <aside class="hidden lg:block fixed right-8 top-24 w-64">
-            <TableOfContents headings={headings} />
-          </aside>
+        </header>
+
+        <!-- Hero Image -->
+        {heroImage && (
+          <figure class="mb-16">
+            <Image
+              width={1020}
+              height={510}
+              src={heroImage}
+              alt=""
+              class="w-full rounded-sm border border-border"
+              loading="eager"
+            />
+          </figure>
         )}
+
+        <!-- Article body — custom typography replacing prose -->
+        <div class="content-body">
+          <slot />
+        </div>
+
+        <!-- End marker -->
+        <div class="mt-20 pt-12 border-t border-border flex items-center justify-between">
+          <span class="font-sans text-xs uppercase tracking-[0.2em] text-muted">End of article</span>
+          <a href="/blog" class="font-mono text-xs tabular-nums text-muted hover:text-accent transition-colors duration-300">Back to blog →</a>
+        </div>
+
       </article>
+
+      <!-- Table of Contents sidebar — desktop only -->
+      {headings.length > 1 && (
+        <aside class="hidden xl:block fixed right-8 top-24 w-56">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+
     </main>
-    
+
     <CopyButton />
-    
+
     <Footer />
-    
-    <script is:inline>
-      document.addEventListener('astro:page-load', () => {
-        const progressBar = document.getElementById('reading-progress');
-        if (!progressBar) return;
 
-        if (window.readingProgressHandler) {
-          window.removeEventListener('scroll', window.readingProgressHandler);
-        }
-        
-        let ticking = false;
-        
-        const updateProgress = () => {
-          const totalHeight = document.body.scrollHeight - window.innerHeight;
-          const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
-          progressBar.style.transform = `scaleX(${progress})`;
-          ticking = false;
-        };
-
-        window.readingProgressHandler = () => {
-          if (!ticking) {
-            window.requestAnimationFrame(updateProgress);
-            ticking = true;
-          }
-        };
-
-        window.addEventListener('scroll', window.readingProgressHandler, { passive: true });
-        
-        // Initial setup
-        updateProgress();
-      });
-    </script>
   </body>
 </html>

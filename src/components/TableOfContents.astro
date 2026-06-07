@@ -12,52 +12,50 @@ if (!headings || headings.length === 0) {
 }
 ---
 
-<nav class="toc hidden lg:block sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto">
-  <h2 class="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-3 uppercase tracking-wider">
-    On this page
-  </h2>
-  <ul class="space-y-2 text-sm">
+<nav class="toc hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+  <h2 class="font-sans text-xs uppercase tracking-[0.2em] text-muted mb-5">On this page</h2>
+  <ul class="space-y-3">
     {headings.map((heading) => (
       <li class={heading.depth === 3 ? 'ml-4' : ''}>
         <a
           href={`#${heading.slug}`}
-          class="block py-1 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors border-l-2 border-transparent hover:border-neutral-400 dark:hover:border-neutral-500 pl-3"
+          class="block py-1 text-sm leading-snug transition-all duration-200 border-l pl-4 -ml-[1px]"
         >
           {heading.text}
         </a>
       </li>
     ))}
   </ul>
+
+  <script>
+    function updateActiveHeading() {
+      const headingEls = document.querySelectorAll('h2[id], h3[id]');
+      const tocLinks = document.querySelectorAll('.toc a');
+
+      let currentHeading: HTMLElement | null = null;
+
+      headingEls.forEach((heading) => {
+        const rect = heading.getBoundingClientRect();
+        if (rect.top <= 120) {
+          currentHeading = heading as HTMLElement;
+        }
+      });
+
+      tocLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href && currentHeading && href === `#${currentHeading.id}`) {
+          link.classList.add('text-foreground', 'border-accent');
+          link.classList.remove('text-muted', 'border-transparent');
+        } else {
+          link.classList.remove('text-foreground', 'border-accent');
+          link.classList.add('text-muted', 'border-transparent');
+        }
+      });
+    }
+
+    document.addEventListener('astro:page-load', () => {
+      updateActiveHeading();
+      window.addEventListener('scroll', updateActiveHeading, { passive: true });
+    });
+  </script>
 </nav>
-
-<script>
-  function updateActiveHeading() {
-    const headings = document.querySelectorAll('h2[id], h3[id]');
-    const tocLinks = document.querySelectorAll('.toc a');
-    
-    let currentHeading = null;
-    
-    headings.forEach((heading) => {
-      const rect = heading.getBoundingClientRect();
-      if (rect.top <= 100) {
-        currentHeading = heading;
-      }
-    });
-    
-    tocLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      if (href && currentHeading && href === `#${currentHeading.id}`) {
-        link.classList.add('text-black', 'dark:text-white', 'border-black', 'dark:border-white');
-        link.classList.remove('text-neutral-600', 'dark:text-neutral-400', 'border-transparent');
-      } else {
-        link.classList.remove('text-black', 'dark:text-white', 'border-black', 'dark:border-white');
-        link.classList.add('text-neutral-600', 'dark:text-neutral-400', 'border-transparent');
-      }
-    });
-  }
-
-  document.addEventListener('astro:page-load', () => {
-    updateActiveHeading();
-    window.addEventListener('scroll', updateActiveHeading, { passive: true });
-  });
-</script>
