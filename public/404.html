@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page Not Found — byrai</title>
+    <meta name="description" content="The page you're looking for doesn't exist." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,opsz,wght@0,5..800;1,5..800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+      :root {
+        --color-bg: #fafaf9;
+        --color-fg: #0a0a0a;
+        --color-muted: #78716c;
+        --color-accent: #d4a017;
+        --font-spectral: 'Spectral', Georgia, serif;
+        --font-inter: 'Inter', system-ui, sans-serif;
+      }
+
+      body {
+        font-family: var(--font-inter);
+        background: var(--color-bg);
+        color: var(--color-fg);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        text-align: center;
+        max-width: 480px;
+        padding: 2rem;
+      }
+
+      .error-code {
+        font-family: var(--font-spectral);
+        font-size: clamp(6rem, 15vw, 10rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: var(--color-fg);
+      }
+
+      .error-code span {
+        color: var(--color-accent);
+      }
+
+      h1 {
+        font-family: var(--font-spectral);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: var(--color-muted);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      a {
+        font-family: var(--font-inter);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid var(--color-fg);
+        color: var(--color-fg);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+
+      a:hover {
+        background: var(--color-fg);
+        color: var(--color-bg);
+      }
+
+      a.accent {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+      }
+
+      a.accent:hover {
+        background: var(--color-accent);
+        color: var(--color-bg);
+      }
+
+      /* Redirect notice */
+      .notice {
+        font-family: var(--font-inter);
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-muted);
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e7e5e4;
+      }
+
+      .notice a {
+        font-size: inherit;
+        letter-spacing: inherit;
+        text-transform: inherit;
+        border: none;
+        padding: 0;
+        color: var(--color-accent);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .notice a:hover {
+        background: transparent;
+        color: var(--color-fg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="error-code"><span>4</span>04</div>
+      <h1>Nothing here.</h1>
+      <p>The page you're looking for doesn't exist. It may have moved, been renamed, or never existed at all.</p>
+
+      <div class="actions">
+        <a href="/">Go home</a>
+        <a href="/blog" class="accent">Read the blog</a>
+      </div>
+
+      <div class="notice">
+        Moved? Visit <a href="https://byrai.xyz">byrai.xyz</a> for the new address.
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+# ── Domain Redirects ──────────────────────────────────────
+# Uncomment these when using a platform that supports _redirects
+# (Netlify, Cloudflare Pages, Vercel, etc.)
+# Keep as comments on GitHub Pages.
+
+# # Old domain → New domain (301 permanent)
+# https://stlkrdumb.github.io/*  https://byrai.xyz/:splat 301
+
+# ── Blog Redirects (old slug patterns → new if any) ─────────
+# Add blog-specific redirects if slugs changed during rebrand.
+
+# ── Legacy Pages ───────────────────────────────────────────
+# /about-old  /  301
