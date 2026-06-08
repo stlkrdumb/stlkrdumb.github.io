@@ -47,13 +47,15 @@
     @apply bg-black text-white;
   }
   
+  
   .dark {
     --color-background: #000000;
-    --color-foreground: #ffffff;
-    --color-muted: #a3a3a3;
-    --color-border: #262626;
+    --color-foreground: #f0f0f0;
+    --color-muted: #c0c0c0;
+    --color-border: #333333;
     --color-accent: #ffffff;
   }
+    
   
   /* Typography */
   h1, h2, h3, h4, h5, h6 {
@@ -93,10 +95,13 @@
 
 @layer components {
   /* Editorial content body */
+  
+  /* Editorial content body */
   .content-body {
     font-size: 1.0625rem;
     line-height: 1.8;
     color: var(--color-foreground);
+    font-weight: 400;
   }
 
   .content-body h1,
@@ -104,7 +109,7 @@
   .content-body h3,
   .content-body h4 {
     font-family: var(--font-spectral), Georgia, Cambria, serif;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.01em;
     margin-top: 3em;
@@ -126,19 +131,15 @@
   .content-body p {
     margin-bottom: 1.5em;
     color: inherit;
+    font-weight: 400;
   }
 
-  /* Drop cap on first paragraph */
-  .content-body > p:first-of-type::first-letter {
-    font-family: var(--font-spectral), Georgia, Cambria, serif;
-    font-size: 4rem;
-    line-height: 0.8;
-    float: left;
-    margin-right: 0.15em;
-    margin-top: 0.05em;
-    color: var(--color-accent);
-    font-weight: 700;
+  /* Dark mode body weight adjustment */
+  .dark .content-body p {
+    font-weight: 400;
+    color: var(--color-foreground);
   }
+
 
   /* Blockquotes — editorial pull quotes */
   .content-body blockquote {
@@ -149,6 +150,7 @@
     font-size: 1.2rem;
     line-height: 1.6;
     color: inherit;
+    opacity: 0.9;
   }
 
   .content-body blockquote p {
@@ -160,7 +162,7 @@
     color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 3px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .content-body a:hover {
@@ -178,7 +180,8 @@
   }
 
   .dark .content-body code {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    color: #e5e5e5;
   }
 
   .content-body pre {
@@ -196,6 +199,7 @@
   .dark .content-body pre {
     background: rgba(255, 255, 255, 0.04);
     border-color: var(--color-border);
+    color: #e5e5e5;
   }
 
   /* Lists */
@@ -219,6 +223,63 @@
     height: auto;
     margin: 2em 0;
     border-radius: 2px;
+  }
+
+  /* Mermaid diagrams — responsive, theme-aware */
+  .content-body svg.flowchart,
+  .content-body svg [data-type="mermaid"] {
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 2.5em 0;
+    overflow-x: auto;
+  }
+
+  /* Mermaid dark mode — overrides internal inline styles with !important */
+  .dark .content-body svg.flowchart,
+  .dark .content-body svg.flowchart * {
+    color: #e0e0e0 !important;
+    fill: #1a1a2e !important;
+    stroke: #c0c0c0 !important;
+  }
+
+  .dark .content-body svg.flowchart .edgeLabel,
+  .dark .content-body svg.flowchart .nodeLabel {
+    color: #f0f0f0 !important;
+  }
+
+  .dark .content-body svg.flowchart .labelBkg {
+    background-color: rgba(26, 26, 46, 0.85) !important;
+    fill: rgba(26, 26, 46, 0.85) !important;
+  }
+
+  .dark .content-body svg.flowchart .edgeLabel p {
+    color: #f0f0f0 !important;
+  }
+
+  .dark .content-body svg.flowchart rect.text,
+  .dark .content-body svg.flowchart polygon,
+  .dark .content-body svg.flowchart ellipse {
+    fill: #1a1a2e !important;
+    stroke: #c0c0c0 !important;
+  }
+
+  .dark .content-body svg.flowchart text {
+    fill: #e0e0e0 !important;
+    color: #e0e0e0 !important;
+  }
+
+  .dark .content-body svg.flowchart .arrowheadPath,
+  .dark .content-body svg.flowchart .edgePath .path,
+  .dark .content-body svg.flowchart .flowchart-link {
+    stroke: #b0b0b0 !important;
+    fill: none !important;
+  }
+
+  .dark .content-body svg.flowchart marker path.arrowMarkerPath {
+    fill: #b0b0b0 !important;
+    stroke: #b0b0b0 !important;
   }
 
   /* Horizontal rules */

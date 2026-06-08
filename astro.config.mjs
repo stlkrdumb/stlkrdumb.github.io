@@ -5,11 +5,24 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
+import rehypeMermaid from 'rehype-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://byrai.xyz',
   integrations: [mdx(), sitemap()],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  markdown: {
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: ['mermaid'],
+    },
+    rehypePlugins: [rehypeMermaid],
+  },
 
   fonts: [
     {
@@ -27,8 +40,4 @@ export default defineConfig({
       subsets: ['latin'],
     },
   ],
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
 });

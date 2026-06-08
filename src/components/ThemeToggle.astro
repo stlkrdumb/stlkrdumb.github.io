@@ -42,7 +42,12 @@
     // Toggle theme on click
     themeToggle?.addEventListener('click', () => {
       const currentTheme = getTheme();
-      setTheme(currentTheme === 'light' ? 'dark' : 'light');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+      // Apply dark styles to mermaid SVGs when switching to dark mode
+      if (newTheme === 'dark' && typeof window.applyMermaidDarkStyles === 'function') {
+        window.applyMermaidDarkStyles();
+      }
     });
   });
 </script>

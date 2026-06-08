@@ -101,7 +101,7 @@ const organizationSchema = {
 <meta name="twitter:site" content="@nurairstalk" />
 <meta name="twitter:creator" content="@nurairstalk" />
 
-<!-- Dark mode script to prevent flash -->
+<!-- Dark mode script to prevent flash + mermaid SVG dark mode fix -->
 <script is:inline>
   const theme = (() => {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -109,9 +109,27 @@ const organizationSchema = {
     }
     return 'light';
   })();
-  
+
+  window.applyMermaidDarkStyles = function applyMermaidDarkStyles() {
+    document.querySelectorAll('svg.flowchart, svg.mermaid').forEach((svg) => {
+      const styleEl = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+      styleEl.textContent = `
+        * { fill: #e8e8f0 !important; stroke: #a0a0b0 !important; }
+        text { fill: #e8e8f0 !important; color: #e8e8f0 !important; }
+        .edgeLabel, .nodeLabel { fill: #f0f0f5 !important; color: #f0f0f5 !important; }
+        .edgeLabel p { color: #f0f0f5 !important; }
+        .labelBkg { fill: rgba(20, 20, 40, 0.85) !important; background-color: rgba(20, 20, 40, 0.85) !important; }
+        rect.basic { fill: #1a1a2e !important; stroke: #6060a0 !important; }
+        polygon, ellipse { fill: #1a1a2e !important; stroke: #8080a8 !important; }
+        .arrowMarkerPath { fill: #c0c0d0 !important; stroke: #c0c0d0 !important; }
+      `;
+      svg.prepend(styleEl);
+    });
+  }
+
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
+    applyMermaidDarkStyles();
   }
 </script>
 
