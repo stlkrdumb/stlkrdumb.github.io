@@ -1,8 +1,8 @@
 import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import { generateBlogPost, BlogPostData } from '../templates/blog-template';
-import { generatePortfolioProject, PortfolioProjectData } from '../templates/portfolio-template';
-import { slugify, generateUniqueFilename } from '../utils/slug';
+import { generateBlogPost, BlogPostData } from '../templates/blog-template.js';
+import { generatePortfolioProject, PortfolioProjectData } from '../templates/portfolio-template.js';
+import { slugify, generateUniqueFilename } from '../utils/slug.js';
 
 export class ContentService {
   private basePath: string;

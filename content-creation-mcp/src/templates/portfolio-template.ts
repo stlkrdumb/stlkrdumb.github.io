@@ -1,5 +1,5 @@
-import { slugify } from '../utils/slug';
-import { validateStyle } from '../utils/style';
+import { slugify } from '../utils/slug.js';
+import { validateStyle } from '../utils/style.js';
 
 export interface PortfolioProjectData {
   title: string;
