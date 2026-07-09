@@ -27,6 +27,7 @@ const portfolio = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
 			techStack: z.array(z.string()).optional(),
+			featured: z.boolean().optional().default(false),
 		}),
 });
 
