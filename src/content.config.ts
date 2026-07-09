@@ -19,13 +19,13 @@ const writing = defineCollection({
 
 const work = defineCollection({
 	loader: glob({ base: './src/content/work', pattern: '**/*.{md,mdx}' }),
-	schema: () =>
+	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: z.string().optional(),
+			heroImage: image(),
 			techStack: z.array(z.string()).optional(),
 			featured: z.boolean().optional().default(false),
 		}),
