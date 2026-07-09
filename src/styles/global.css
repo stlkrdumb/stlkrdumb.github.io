@@ -196,15 +196,16 @@
   .content-body pre {
     font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.85rem;
-    line-height: 1.6;
+    line-height: 1.7;
     background: #0d1117;
     color: #c9d1d9;
     border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
     margin: 2em 0;
     overflow-x: auto;
     tab-size: 2;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .content-body pre code {
@@ -213,6 +214,25 @@
     border-radius: 0;
     color: inherit;
     font-size: inherit;
+    line-height: inherit;
+  }
+
+  /* Language label badge (if present) */
+  .content-body pre[data-language] {
+    position: relative;
+  }
+
+  .content-body pre[data-language]::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #484f58;
+    font-family: var(--font-sans);
+    pointer-events: none;
   }
 
   .dark .content-body pre {
