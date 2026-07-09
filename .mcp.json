@@ -12,6 +12,12 @@
         "mcp"
       ],
       "directTools": true
+    },
+    "content-creation-mcp": {
+      "command": "node",
+      "args": [
+        "content-creation-mcp/dist/index.js"
+      ]
     }
   }
 }
