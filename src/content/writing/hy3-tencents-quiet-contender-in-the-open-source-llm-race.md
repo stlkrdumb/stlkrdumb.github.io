@@ -2,7 +2,7 @@
 title: "Hy3: Tencent's Quiet Contender in the Open-Source LLM Race"
 description: "How a 295B-parameter MoE model from Tencent is outperforming DeepSeek and Kimi on benchmarks while flying under the radar."
 pubDate: 2026-07-09
-heroImage: ./hy3-architecture.jpg
+heroImage: ../../assets/ai-tech.jpg
 readingTime: "6 min read"
 ---
 
