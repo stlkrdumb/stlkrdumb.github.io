@@ -1,0 +1,68 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { getCollection } from 'astro:content';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Group by year
+const groupedByYear = sortedPosts.reduce((acc, post) => {
+  const year = post.data.pubDate.getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {} as Record<string, typeof sortedPosts>);
+
+const years = Object.keys(groupedByYear).sort().reverse();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} ogImageUrl="/og-default.png" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-background text-foreground">
+
+    <Header />
+
+    <main class="flex-1 flex flex-col">
+
+      <section class="max-w-3xl mx-auto w-full px-6 md:px-10 lg:px-16 py-24">
+
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl tracking-tight mb-16">Writing</h1>
+
+        {years.map((year) => (
+          <div class="mb-16 last:mb-0">
+            <h2 class="font-mono text-sm uppercase tracking-[0.2em] text-muted mb-8">{year}</h2>
+            <div class="space-y-6">
+              {groupedByYear[year].map((post) => (
+                <article class="group">
+                  <a href={`/writing/${post.id}/`} class="block">
+                    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6">
+                      <time class="font-mono text-xs tabular-nums text-muted whitespace-nowrap">
+                        {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
+                      </time>
+                      <h3 class="font-serif text-xl sm:text-2xl leading-snug group-hover:text-accent transition-colors duration-300">
+                        {post.data.title}
+                      </h3>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+
+      </section>
+
+    </main>
+
+    <Footer />
+
+  </body>
+</html>
