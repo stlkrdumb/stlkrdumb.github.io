@@ -1,5 +1,5 @@
-import { slugify } from '../utils/slug';
-import { validateStyle } from '../utils/style';
+import { slugify } from '../utils/slug.js';
+import { validateStyle } from '../utils/style.js';
 export function generatePortfolioProject(data) {
     const slug = slugify(data.title);
     const pubDate = data.pubDate || new Date();
