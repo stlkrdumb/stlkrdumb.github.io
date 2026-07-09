@@ -8,9 +8,7 @@ describe('ContentService', () => {
   const testDir = join(process.cwd(), 'test-content');
   
   beforeEach(() => {
-    service = new ContentService();
-    // Override BASE_DIR for testing
-    (service as any).BASE_DIR = testDir;
+    service = new ContentService(testDir);
     mkdirSync(join(testDir, 'writing'), { recursive: true });
     mkdirSync(join(testDir, 'work'), { recursive: true });
   });

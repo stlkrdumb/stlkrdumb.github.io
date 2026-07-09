@@ -4,13 +4,16 @@ import { generateBlogPost, BlogPostData } from '../templates/blog-template';
 import { generatePortfolioProject, PortfolioProjectData } from '../templates/portfolio-template';
 import { slugify, generateUniqueFilename } from '../utils/slug';
 
-const BASE_DIR = join(process.cwd(), 'src', 'content');
-
 export class ContentService {
+  private basePath: string;
+  
+  constructor(basePath?: string) {
+    this.basePath = basePath || join(process.cwd(), 'src', 'content');
+  }
   async saveWriting(data: BlogPostData): Promise<string> {
     const markdown = generateBlogPost(data);
     const slug = slugify(data.title);
-    const writingDir = join(BASE_DIR, 'writing');
+    const writingDir = join(this.basePath, 'writing');
     
     if (!existsSync(writingDir)) {
       mkdirSync(writingDir, { recursive: true });
@@ -30,7 +33,7 @@ export class ContentService {
   async saveWork(data: PortfolioProjectData): Promise<string> {
     const markdown = generatePortfolioProject(data);
     const slug = slugify(data.title);
-    const workDir = join(BASE_DIR, 'work');
+    const workDir = join(this.basePath, 'work');
     
     if (!existsSync(workDir)) {
       mkdirSync(workDir, { recursive: true });
@@ -48,7 +51,7 @@ export class ContentService {
   }
   
   async listWriting(): Promise<Array<{title: string, slug: string, pubDate: string}>> {
-    const writingDir = join(BASE_DIR, 'writing');
+    const writingDir = join(this.basePath, 'writing');
     if (!existsSync(writingDir)) return [];
     
     const files = readdirSync(writingDir).filter(f => f.endsWith('.md'));
@@ -66,7 +69,7 @@ export class ContentService {
   }
   
   async listWork(): Promise<Array<{title: string, slug: string, featured: boolean}>> {
-    const workDir = join(BASE_DIR, 'work');
+    const workDir = join(this.basePath, 'work');
     if (!existsSync(workDir)) return [];
     
     const files = readdirSync(workDir).filter(f => f.endsWith('.md'));
