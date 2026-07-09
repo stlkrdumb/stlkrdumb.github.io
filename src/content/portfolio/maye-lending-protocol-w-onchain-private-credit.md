@@ -4,6 +4,7 @@ description: "Maye is a premium, privacy-preserving consumer lending interface d
 pubDate: 2026-06-08
 heroImage: ../../assets/portfolio/maye-cover.png
 techStack: ["React","Next.js","Solidity"]
+featured: true
 
 ---
 
