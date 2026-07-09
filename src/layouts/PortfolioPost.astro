@@ -9,11 +9,23 @@ import '../styles/global.css';
 type Props = CollectionEntry<'portfolio'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage, techStack } = Astro.props;
+
+// Breadcrumbs for structured data
+const slug = Astro.url.pathname.split('/').pop() || '';
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Portfolio', href: '/work' },
+  { label: title, href: `/work/${slug}` }
+];
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead 
+      title={title} 
+      description={description} 
+      breadcrumbs={breadcrumbs}
+    />
   </head>
 
   <body class="min-h-screen flex flex-col bg-background text-foreground">

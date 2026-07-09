@@ -17,7 +17,8 @@
       "command": "node",
       "args": [
         "content-creation-mcp/dist/index.js"
-      ]
+      ],
+      "directTools": true
     }
   }
 }

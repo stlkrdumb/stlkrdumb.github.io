@@ -13,11 +13,12 @@ interface Props {
   article?: boolean;
   publishedTime?: Date;
   modifiedTime?: Date;
+  breadcrumbs?: Array<{ label: string; href: string }>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage, ogImageUrl, article = false, publishedTime, modifiedTime } = Astro.props;
+const { title, description, image = FallbackImage, ogImageUrl, article = false, publishedTime, modifiedTime, breadcrumbs } = Astro.props;
 
 // Handle both ImageMetadata objects and string paths
 const imageUrl = typeof image === 'string' ? image : image.src;
@@ -65,6 +66,12 @@ const organizationSchema = {
   href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
+
+<!-- Preconnect to external domains for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://plausible.io" />
+<link rel="preconnect" href="https://pagefind.app" />
 
 <ClientRouter />
 
@@ -134,6 +141,20 @@ const organizationSchema = {
     applyMermaidDarkStyles();
   }
 </script>
+
+<!-- BreadcrumbList Schema (if breadcrumbs provided) -->
+{breadcrumbs && breadcrumbs.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.label,
+      "item": new URL(crumb.href, SITE_URL).toString()
+    }))
+  })} />
+)}
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />

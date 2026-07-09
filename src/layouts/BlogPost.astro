@@ -18,6 +18,13 @@ const { title, description, pubDate, updatedDate, heroImage, slug, rawContent } 
 
 const ogImageUrl = slug ? `/blog/${slug}/og-image.png` : '/og-default.png';
 
+// Breadcrumbs for structured data
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Writing', href: '/writing' },
+  { label: title, href: `/writing/${slug}` }
+];
+
 const readingTime = rawContent ? getReadingTime(rawContent) : null;
 const headings = rawContent ? extractHeadings(rawContent) : [];
 
@@ -46,7 +53,16 @@ const articleSchema = {
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={heroImage} ogImageUrl={ogImageUrl} article={true} publishedTime={pubDate} modifiedTime={updatedDate} />
+    <BaseHead 
+      title={title} 
+      description={description} 
+      image={heroImage} 
+      ogImageUrl={ogImageUrl} 
+      article={true} 
+      publishedTime={pubDate} 
+      modifiedTime={updatedDate}
+      breadcrumbs={breadcrumbs}
+    />
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   </head>
 
