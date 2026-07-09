@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import { getCollection } from 'astro:content';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
-const projects = await getCollection('portfolio');
+const projects = await getCollection('work');
 const featured = projects.find(p => p.data.featured) || projects[0];
 const others = projects.filter(p => p.id !== featured.id);
 ---

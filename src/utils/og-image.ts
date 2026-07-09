@@ -86,7 +86,7 @@ export async function generateOgImage({ title, description = '', type = 'page' }
 }
 
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('writing');
   
   return [
     { params: { slug: '__default' } as any, props: { title: 'byrai', description: 'Writing at the intersection of code & thought.', type: 'page' as const } },

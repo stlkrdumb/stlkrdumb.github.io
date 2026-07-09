@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import { getCollection } from 'astro:content';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('writing');
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
