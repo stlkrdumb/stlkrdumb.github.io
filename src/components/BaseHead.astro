@@ -8,7 +8,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_AUTHOR, SOCIAL_LINKS } fro
 interface Props {
   title: string;
   description: string;
-  image?: ImageMetadata;
+  image?: ImageMetadata | string;
   ogImageUrl?: string;
   article?: boolean;
   publishedTime?: Date;
@@ -19,7 +19,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage, ogImageUrl, article = false, publishedTime, modifiedTime } = Astro.props;
 
-const finalOgImage = ogImageUrl ? new URL(ogImageUrl, SITE_URL).toString() : new URL(image.src, Astro.url).toString();
+// Handle both ImageMetadata objects and string paths
+const imageUrl = typeof image === 'string' ? image : image.src;
+const finalOgImage = ogImageUrl ? new URL(ogImageUrl, SITE_URL).toString() : new URL(imageUrl, Astro.url).toString();
 
 const websiteSchema = {
   "@context": "https://schema.org",

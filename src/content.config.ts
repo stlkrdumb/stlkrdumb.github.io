@@ -6,26 +6,26 @@ const writing = defineCollection({
 	// Load Markdown and MDX files in the `src/content/writing/` directory.
 	loader: glob({ base: './src/content/writing', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
+	schema: () =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
+			heroImage: z.string().optional(),
 		}),
 });
 
 const work = defineCollection({
 	loader: glob({ base: './src/content/work', pattern: '**/*.{md,mdx}' }),
-	schema: ({ image }) =>
+	schema: () =>
 		z.object({
 			title: z.string(),
 			description: z.string(),
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
+			heroImage: z.string().optional(),
 			techStack: z.array(z.string()).optional(),
 			featured: z.boolean().optional().default(false),
 		}),

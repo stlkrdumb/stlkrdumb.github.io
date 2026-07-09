@@ -40,7 +40,7 @@ const articleSchema = {
     "@type": "WebPage",
     "id": new URL(Astro.url.pathname, SITE_URL).toString()
   },
-  "image": heroImage ? new URL(heroImage.src, SITE_URL).toString() : new URL(ogImageUrl, SITE_URL).toString()
+  "image": heroImage ? new URL(heroImage, SITE_URL).toString() : new URL(ogImageUrl, SITE_URL).toString()
 };
 ---
 
@@ -96,9 +96,7 @@ const articleSchema = {
         <!-- Hero Image -->
         {heroImage && (
           <figure class="mb-16">
-            <Image
-              width={1020}
-              height={510}
+            <img
               src={heroImage}
               alt=""
               class="w-full rounded-sm border border-border"
