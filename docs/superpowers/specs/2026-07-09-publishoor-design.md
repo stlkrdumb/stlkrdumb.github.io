@@ -160,7 +160,7 @@ Results, learnings, what's next. Links to live demo / repo if available.
 ## File Structure
 
 ```
-content-creation-mcp/
+publishoor/
 ├── package.json
 ├── tsconfig.json
 ├── src/

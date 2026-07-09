@@ -13,10 +13,10 @@
       ],
       "directTools": true
     },
-    "content-creation-mcp": {
+    "publishoor": {
       "command": "node",
       "args": [
-        "content-creation-mcp/dist/index.js"
+        "publishoor/dist/index.js"
       ],
       "directTools": true
     }

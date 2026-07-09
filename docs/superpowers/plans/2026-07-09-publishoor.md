@@ -21,9 +21,9 @@
 ### Task 1: Project Scaffolding
 
 **Files:**
-- Create: `content-creation-mcp/package.json`
-- Create: `content-creation-mcp/tsconfig.json`
-- Create: `content-creation-mcp/.gitignore`
+- Create: `publishoor/package.json`
+- Create: `publishoor/tsconfig.json`
+- Create: `publishoor/.gitignore`
 
 **Interfaces:**
 - Consumes: None
@@ -33,7 +33,7 @@
 
 ```json
 {
-  "name": "content-creation-mcp",
+  "name": "publishoor",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -83,14 +83,14 @@ dist/
 
 - [ ] **Step 4: Install dependencies**
 
-Run: `cd content-creation-mcp && npm install`
+Run: `cd publishoor && npm install`
 Expected: Dependencies installed successfully
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add content-creation-mcp/package.json content-creation-mcp/tsconfig.json content-creation-mcp/.gitignore
-git commit -m "chore: scaffold content-creation-mcp project"
+git add publishoor/package.json publishoor/tsconfig.json publishoor/.gitignore
+git commit -m "chore: scaffold publishoor project"
 ```
 
 ---
@@ -98,8 +98,8 @@ git commit -m "chore: scaffold content-creation-mcp project"
 ### Task 2: Core Utility Functions
 
 **Files:**
-- Create: `content-creation-mcp/src/utils/slug.ts`
-- Create: `content-creation-mcp/src/utils/style.ts`
+- Create: `publishoor/src/utils/slug.ts`
+- Create: `publishoor/src/utils/style.ts`
 
 **Interfaces:**
 - Consumes: None
@@ -166,7 +166,7 @@ export function validateStyle(text: string): string {
 - [ ] **Step 3: Write tests for slug utility**
 
 ```typescript
-// content-creation-mcp/tests/slug.test.ts
+// publishoor/tests/slug.test.ts
 
 import { describe, it, expect } from 'vitest';
 import { slugify, generateUniqueFilename } from '../src/utils/slug';
@@ -202,29 +202,29 @@ describe('generateUniqueFilename', () => {
 
 - [ ] **Step 4: Install vitest for testing**
 
-Run: `cd content-creation-mcp && npm install -D vitest`
+Run: `cd publishoor && npm install -D vitest`
 
 - [ ] **Step 5: Run tests to verify they fail**
 
-Run: `cd content-creation-mcp && npx vitest run tests/slug.test.ts`
+Run: `cd publishoor && npx vitest run tests/slug.test.ts`
 Expected: FAIL (utils not created yet)
 
 - [ ] **Step 6: Create utils directory and files**
 
 ```bash
-mkdir -p content-creation-mcp/src/utils
+mkdir -p publishoor/src/utils
 # Copy the code from Step 1 and Step 2 into the files
 ```
 
 - [ ] **Step 7: Run tests to verify they pass**
 
-Run: `cd content-creation-mcp && npx vitest run tests/slug.test.ts`
+Run: `cd publishoor && npx vitest run tests/slug.test.ts`
 Expected: PASS (2 tests, 6 assertions)
 
 - [ ] **Step 8: Commit**
 
 ```bash
-git add content-creation-mcp/src/utils/ content-creation-mcp/tests/slug.test.ts
+git add publishoor/src/utils/ publishoor/tests/slug.test.ts
 git commit -m "feat: add slug generation and style validation utilities"
 ```
 
@@ -233,8 +233,8 @@ git commit -m "feat: add slug generation and style validation utilities"
 ### Task 3: Content Templates
 
 **Files:**
-- Create: `content-creation-mcp/src/templates/blog-template.ts`
-- Create: `content-creation-mcp/src/templates/portfolio-template.ts`
+- Create: `publishoor/src/templates/blog-template.ts`
+- Create: `publishoor/src/templates/portfolio-template.ts`
 
 **Interfaces:**
 - Consumes: `slugify()` from Task 2
@@ -331,7 +331,7 @@ featured: ${data.featured || false}
 - [ ] **Step 3: Write tests for templates**
 
 ```typescript
-// content-creation-mcp/tests/templates.test.ts
+// publishoor/tests/templates.test.ts
 
 import { describe, it, expect } from 'vitest';
 import { generateBlogPost } from '../src/templates/blog-template';
@@ -385,19 +385,19 @@ describe('generatePortfolioProject', () => {
 - [ ] **Step 4: Create templates directory and files**
 
 ```bash
-mkdir -p content-creation-mcp/src/templates
+mkdir -p publishoor/src/templates
 # Copy the code from Step 1 and Step 2 into the files
 ```
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `cd content-creation-mcp && npx vitest run tests/templates.test.ts`
+Run: `cd publishoor && npx vitest run tests/templates.test.ts`
 Expected: PASS
 
 - [ ] **Step 6: Commit**
 
 ```bash
-git add content-creation-mcp/src/templates/ content-creation-mcp/tests/templates.test.ts
+git add publishoor/src/templates/ publishoor/tests/templates.test.ts
 git commit -m "feat: add blog and portfolio content templates"
 ```
 
@@ -406,7 +406,7 @@ git commit -m "feat: add blog and portfolio content templates"
 ### Task 4: Content Service (File I/O)
 
 **Files:**
-- Create: `content-creation-mcp/src/services/content.service.ts`
+- Create: `publishoor/src/services/content.service.ts`
 
 **Interfaces:**
 - Consumes: `generateBlogPost()`, `generatePortfolioProject()` from Task 3
@@ -507,7 +507,7 @@ export class ContentService {
 - [ ] **Step 2: Write tests for content service**
 
 ```typescript
-// content-creation-mcp/tests/content-service.test.ts
+// publishoor/tests/content-service.test.ts
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { writeFileSync, mkdirSync, rmSync } from 'fs';
@@ -557,19 +557,19 @@ describe('ContentService', () => {
 - [ ] **Step 3: Create services directory and file**
 
 ```bash
-mkdir -p content-creation-mcp/src/services
+mkdir -p publishoor/src/services
 # Copy the code from Step 1 into content.service.ts
 ```
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `cd content-creation-mcp && npx vitest run tests/content-service.test.ts`
+Run: `cd publishoor && npx vitest run tests/content-service.test.ts`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add content-creation-mcp/src/services/ content-creation-mcp/tests/content-service.test.ts
+git add publishoor/src/services/ publishoor/tests/content-service.test.ts
 git commit -m "feat: add content service for file I/O operations"
 ```
 
@@ -578,7 +578,7 @@ git commit -m "feat: add content service for file I/O operations"
 ### Task 5: MCP Server Entry Point
 
 **Files:**
-- Create: `content-creation-mcp/src/index.ts`
+- Create: `publishoor/src/index.ts`
 
 **Interfaces:**
 - Consumes: `ContentService` from Task 4, all templates from Task 3
@@ -597,7 +597,7 @@ import { ContentService } from './services/content.service';
 const contentService = new ContentService();
 
 const server = new Server(
-  { name: 'content-creation-mcp', version: '1.0.0' },
+  { name: 'publishoor', version: '1.0.0' },
   { capabilities: { tools: {} } }
 );
 
@@ -726,13 +726,13 @@ main().catch((error) => {
 
 - [ ] **Step 3: Build the server**
 
-Run: `cd content-creation-mcp && npm run build`
+Run: `cd publishoor && npm run build`
 Expected: Build succeeds, no TypeScript errors
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add content-creation-mcp/src/index.ts content-creation-mcp/package.json content-creation-mcp/tsconfig.json
+git add publishoor/src/index.ts publishoor/package.json publishoor/tsconfig.json
 git commit -m "feat: add MCP server entry point with 6 tools"
 ```
 
@@ -741,8 +741,8 @@ git commit -m "feat: add MCP server entry point with 6 tools"
 ### Task 6: Integration Test & README
 
 **Files:**
-- Create: `content-creation-mcp/tests/integration.test.ts`
-- Create: `content-creation-mcp/README.md`
+- Create: `publishoor/tests/integration.test.ts`
+- Create: `publishoor/README.md`
 
 **Interfaces:**
 - Consumes: All previous tasks
@@ -841,7 +841,7 @@ Configure in your MCP client:
 ```json
 {
   "mcpServers": {
-    "content-creation-mcp": {
+    "publishoor": {
       "command": "node",
       "args": ["dist/index.js"]
     }
@@ -858,13 +858,13 @@ npm test
 
 - [ ] **Step 3: Run integration tests**
 
-Run: `cd content-creation-mcp && npx vitest run tests/integration.test.ts`
+Run: `cd publishoor && npx vitest run tests/integration.test.ts`
 Expected: PASS
 
 - [ ] **Step 4: Commit**
 
 ```bash
-git add content-creation-mcp/tests/integration.test.ts content-creation-mcp/README.md
+git add publishoor/tests/integration.test.ts publishoor/README.md
 git commit -m "feat: add integration tests and README"
 ```
 
@@ -887,7 +887,7 @@ git commit -m "feat: add integration tests and README"
 
 ## Execution Handoff
 
-Plan complete and saved to `docs/superpowers/plans/2026-07-09-content-creation-mcp-server.md`. Two execution options:
+Plan complete and saved to `docs/superpowers/plans/2026-07-09-publishoor-server.md`. Two execution options:
 
 **1. Subagent-Driven (recommended)** — I dispatch a fresh subagent per task, review between tasks, fast iteration
 
