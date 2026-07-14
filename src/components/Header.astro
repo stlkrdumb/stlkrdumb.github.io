@@ -16,7 +16,7 @@ function isActive(pathname: string, href: string): boolean {
 <header class="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-border">
   <nav class="max-w-[1400px] mx-auto h-16 flex items-center justify-between px-6 md:px-10 lg:px-16">
     <!-- Logo — editorial masthead feel -->
-    <a href="/" class="flex items-center gap-3 hover:opacity-70 transition-opacity duration-200" aria-label={SITE_TITLE}>
+    <a href="/" class="flex items-center gap-3 hover:opacity-70 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm" aria-label={SITE_TITLE}>
       <img src="/logo.svg" alt={SITE_TITLE} class="h-10 w-auto" />
     </a>
 
@@ -25,7 +25,7 @@ function isActive(pathname: string, href: string): boolean {
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class={`relative px-4 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-all duration-200 border-2 ${
+          class={`relative px-4 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-all duration-200 border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm ${
             isActive(Astro.url.pathname, link.href)
               ? 'bg-foreground text-background border-border'
               : 'bg-transparent text-foreground border-transparent hover:border-border hover:bg-surface'
@@ -38,7 +38,7 @@ function isActive(pathname: string, href: string): boolean {
       <!-- Search icon button -->
       <a
         href="/search"
-        class="w-10 h-10 flex items-center justify-center text-foreground border-2 border-border hover:bg-surface transition-all duration-200"
+        class="w-11 h-11 flex items-center justify-center text-foreground border-2 border-border hover:bg-surface transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm"
         aria-label="Search"
       >
         <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -19,10 +19,14 @@ const featured = projects.find(p => p.data.featured) || projects[0];
     />
   </head>
   <body class="min-h-screen flex flex-col bg-background text-foreground">
+    <!-- Skip navigation -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest focus:border-2 focus:border-accent">
+      Skip to content
+    </a>
 
     <Header />
 
-    <main class="flex-1 flex flex-col">
+    <main id="main" class="flex-1 flex flex-col">
 
       <!-- Hero Section — Bold Typography -->
       <section class="max-w-[1400px] mx-auto w-full px-6 md:px-10 lg:px-16 py-24 flex-1 flex flex-col justify-center">
@@ -62,6 +66,7 @@ const featured = projects.find(p => p.data.featured) || projects[0];
                   alt={featured.data.title}
                   width="800"
                   height="600"
+                  loading="lazy"
                   class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>

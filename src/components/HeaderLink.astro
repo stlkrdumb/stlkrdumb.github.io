@@ -12,8 +12,8 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 <a href={href} class:list={[
   "h-9 px-2 sm:px-3 rounded-md transition-colors flex items-center gap-2 justify-center", 
   isActive 
-    ? "bg-neutral-100 dark:bg-neutral-900 text-black dark:text-white" 
-    : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-900 hover:text-black dark:hover:text-white"
+    ? "bg-surface text-foreground" 
+    : "text-muted hover:bg-surface hover:text-foreground"
 ]} {...props}>
   <slot />
 </a>

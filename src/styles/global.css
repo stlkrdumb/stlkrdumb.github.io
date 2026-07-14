@@ -54,7 +54,7 @@
     --color-background: #000000;
     --color-surface: #1a1a1a;
     --color-foreground: #f0f0f0;
-    --color-muted: #999999;
+    --color-muted: #b0b0b0;
     --color-border: #ffffff;
     --color-accent: #d4a853;
   }
@@ -81,6 +81,19 @@
 
   .dark a {
     @apply text-accent underline decoration-accent/40 hover:decoration-accent;
+  }
+
+  /* Focus visible — global */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
   }
 }
 
