@@ -12,7 +12,7 @@
   --color-foreground: #000000;
   --color-muted: #666666;
   --color-border: #000000;
-  --color-accent: #d4a853;
+  --color-accent: #2563eb;
   
   --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
 }
@@ -56,7 +56,7 @@
     --color-foreground: #f0f0f0;
     --color-muted: #b0b0b0;
     --color-border: #ffffff;
-    --color-accent: #d4a853;
+    --color-accent: #2563eb;
   }
     
   
