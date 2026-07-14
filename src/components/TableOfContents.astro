@@ -12,20 +12,31 @@ if (!headings || headings.length === 0) {
 }
 ---
 
-<nav class="toc hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-  <h2 class="font-sans text-xs uppercase tracking-[0.2em] text-muted mb-5">On this page</h2>
-  <ul class="space-y-3">
-    {headings.map((heading) => (
-      <li class={heading.depth === 3 ? 'ml-4' : ''}>
-        <a
-          href={`#${heading.slug}`}
-          class="block py-1 text-sm leading-snug transition-all duration-200 border-l pl-4 -ml-[1px]"
-        >
-          {heading.text}
-        </a>
-      </li>
-    ))}
-  </ul>
+<nav class="toc hidden xl:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto bg-surface dark:bg-black border-3 border-border">
+  <!-- Window Frame Header -->
+  <div class="flex items-center justify-between px-6 pt-5 pb-4 border-b-2 border-border">
+    <div class="flex items-center gap-2">
+      <div class="w-2.5 h-2.5 bg-red-500 border-2 border-border"></div>
+      <div class="w-2.5 h-2.5 bg-yellow-500 border-2 border-border"></div>
+      <div class="w-2.5 h-2.5 bg-green-500 border-2 border-border"></div>
+    </div>
+    <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">On this page</span>
+  </div>
+  
+  <div class="p-6">
+    <ul class="space-y-3">
+      {headings.map((heading) => (
+        <li class={heading.depth === 3 ? 'ml-4' : ''}>
+          <a
+            href={`#${heading.slug}`}
+            class="block py-1 text-sm leading-snug transition-all duration-200 border-l pl-4 -ml-[1px]"
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 
   <script>
     function updateActiveHeading() {
