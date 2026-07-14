@@ -34,9 +34,10 @@ if (!headings || headings.length === 0) {
 
       let currentHeading: HTMLElement | null = null;
 
+      // Find the most recent heading that's above the threshold
       headingEls.forEach((heading) => {
         const rect = heading.getBoundingClientRect();
-        if (rect.top <= 120) {
+        if (rect.top <= 150) {
           currentHeading = heading as HTMLElement;
         }
       });
@@ -44,11 +45,11 @@ if (!headings || headings.length === 0) {
       tocLinks.forEach((link) => {
         const href = link.getAttribute('href');
         if (href && currentHeading && href === `#${currentHeading.id}`) {
-          link.classList.add('text-foreground', 'border-accent');
-          link.classList.remove('text-muted', 'border-transparent');
+          link.classList.add('text-accent', 'dark:text-accent', 'border-accent', 'dark:border-accent');
+          link.classList.remove('text-muted', 'dark:text-muted', 'border-transparent');
         } else {
-          link.classList.remove('text-foreground', 'border-accent');
-          link.classList.add('text-muted', 'border-transparent');
+          link.classList.remove('text-accent', 'dark:text-accent', 'border-accent', 'dark:border-accent');
+          link.classList.add('text-muted', 'dark:text-muted', 'border-transparent');
         }
       });
     }

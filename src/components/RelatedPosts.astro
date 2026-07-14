@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+type Props = {
+  posts: CollectionEntry<'writing'>[];
+  currentSlug: string;
+  maxPosts?: number;
+};
+
+const { posts, currentSlug, maxPosts = 3 } = Astro.props;
+
+// Filter out current post and take only requested amount
+const relatedPosts = posts
+  .filter(post => post.slug !== currentSlug)
+  .slice(0, maxPosts);
+---
+
+{relatedPosts.length > 0 && (
+  <section class="mt-20 pt-12 border-t-3 border-border">
+    <h2 class="font-sans text-xl font-bold text-foreground dark:text-white mb-8 uppercase tracking-[0.15em]">
+      Related Writing
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {relatedPosts.map((post) => (
+        <a 
+          href={`/writing/${post.slug}`}
+          class="group block p-5 bg-surface dark:bg-black border-2 border-border hover:border-accent dark:hover:border-accent transition-all duration-300"
+        >
+          <h3 class="font-serif text-lg leading-tight mb-3 group-hover:text-accent dark:group-hover:text-accent transition-colors duration-300">
+            {post.data.title}
+          </h3>
+          
+          {post.data.description && (
+            <p class="font-sans text-sm text-muted dark:text-muted line-clamp-2 mb-3">
+              {post.data.description}
+            </p>
+          )}
+
+          <div class="font-mono text-xs text-muted dark:text-muted">
+            <FormattedDate date={post.data.pubDate} />
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
