@@ -52,7 +52,7 @@ const others = projects.filter(p => p.id !== featured.id);
             )}
           </div>
           <div class="p-6 md:p-8 lg:p-12">
-            <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight mb-3 group-hover:text-accent transition-colors duration-200">
+            <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight mb-3 text-foreground dark:text-white group-hover:text-accent dark:group-hover:text-accent transition-colors duration-200">
               {featured.data.title}
             </h1>
             <p class="text-muted text-sm md:text-base max-w-2xl mb-6">{featured.data.description}</p>
@@ -103,7 +103,7 @@ const others = projects.filter(p => p.id !== featured.id);
                 </div>
               </a>
               <div class="p-6">
-                <h3 class="font-serif text-xl md:text-2xl leading-tight mb-2 group-hover:text-accent transition-colors duration-200">
+                <h3 class="font-serif text-xl md:text-2xl leading-tight mb-2 text-foreground dark:text-white group-hover:text-accent dark:group-hover:text-accent transition-colors duration-200">
                   {project.data.title}
                 </h3>
                 <p class="text-muted text-sm leading-relaxed mb-4 line-clamp-2">{project.data.description}</p>

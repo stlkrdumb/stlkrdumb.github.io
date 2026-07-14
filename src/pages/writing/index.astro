@@ -71,7 +71,7 @@ const years = Object.keys(groupedByYear).sort().reverse();
                       <time class="font-mono text-xs tabular-nums text-muted whitespace-nowrap">
                         {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit' })}
                       </time>
-                      <h3 class="font-serif text-xl sm:text-2xl leading-snug group-hover:text-accent transition-colors duration-200">
+                      <h3 class="font-serif text-xl sm:text-2xl leading-snug text-foreground dark:text-white group-hover:text-accent dark:group-hover:text-accent transition-colors duration-200">
                         {post.data.title}
                       </h3>
                     </div>
