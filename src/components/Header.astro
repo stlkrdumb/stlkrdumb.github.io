@@ -20,28 +20,31 @@ function isActive(pathname: string, href: string): boolean {
       <img src="/logo.svg" alt={SITE_TITLE} class="h-10 w-auto" />
     </a>
 
-    <!-- Nav links — sharp, minimal, editorial -->
-    <div class="flex items-center gap-x-1">
+    <!-- Nav links — centered, sharp, minimal -->
+    <div class="flex items-center gap-x-2">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class={`relative px-4 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-all duration-200 border-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm ${
+          class={`px-4 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-all duration-200 border-2 ${
             isActive(Astro.url.pathname, link.href)
               ? 'bg-foreground text-background border-border'
               : 'bg-transparent text-foreground border-transparent hover:border-border hover:bg-surface'
-          }`}
+          } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm`}
         >
           {link.label}
         </a>
       ))}
+    </div>
 
+    <!-- Actions — search + theme toggle -->
+    <div class="flex items-center gap-x-2">
       <!-- Search icon button -->
       <a
         href="/search"
-        class="w-11 h-11 flex items-center justify-center text-foreground border-2 border-border hover:bg-surface transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm"
+        class="w-10 h-10 flex items-center justify-center text-foreground border-2 border-border hover:bg-surface transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 rounded-sm"
         aria-label="Search"
       >
-        <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </a>
