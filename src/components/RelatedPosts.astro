@@ -12,7 +12,12 @@ const { posts, currentSlug, maxPosts = 3 } = Astro.props;
 
 // Filter out current post and take only requested amount
 const relatedPosts = posts
-  .filter(post => post.slug !== currentSlug)
+  .filter(post => {
+    // Ensure we're comparing slugs correctly
+    const postSlug = typeof post.slug === 'string' ? post.slug : '';
+    const current = typeof currentSlug === 'string' ? currentSlug : '';
+    return postSlug !== current && post.data?.title;
+  })
   .slice(0, maxPosts);
 ---
 
@@ -29,17 +34,17 @@ const relatedPosts = posts
           class="group block p-5 bg-surface dark:bg-black border-2 border-border hover:border-accent dark:hover:border-accent transition-all duration-300"
         >
           <h3 class="font-serif text-lg leading-tight mb-3 group-hover:text-accent dark:group-hover:text-accent transition-colors duration-300">
-            {post.data.title}
+            {post.data?.title || 'Untitled'}
           </h3>
           
-          {post.data.description && (
+          {post.data?.description && (
             <p class="font-sans text-sm text-muted dark:text-muted line-clamp-2 mb-3">
               {post.data.description}
             </p>
           )}
 
           <div class="font-mono text-xs text-muted dark:text-muted">
-            <FormattedDate date={post.data.pubDate} />
+            <FormattedDate date={post.data?.pubDate} />
           </div>
         </a>
       ))}
