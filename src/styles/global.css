@@ -110,9 +110,9 @@
 }
 
 @layer components {
-  /* Retro-modern brutalist window frame */
+  /* Retro-modern brutalist window frame — bold borders */
   .window-frame {
-    border: 2px solid var(--color-border);
+    border: 3px solid var(--color-border);
     background: var(--color-background);
     overflow: hidden;
   }
@@ -123,17 +123,17 @@
     justify-content: space-between;
     padding: 12px 16px;
     background: var(--color-surface);
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 3px solid var(--color-border);
   }
 
   .window-frame-dots {
     display: flex;
-    gap: 6px;
+    gap: 8px;
   }
 
   .window-frame-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: var(--color-border);
   }
@@ -144,9 +144,9 @@
     color: var(--color-muted);
   }
 
-  /* Hard border utility */
+  /* Hard border utility — bold */
   .border-hard {
-    border: 2px solid var(--color-border);
+    border: 3px solid var(--color-border);
   }
 
   /* Surface background */
