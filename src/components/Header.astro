@@ -13,10 +13,10 @@ function isActive(pathname: string, href: string): boolean {
 }
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-sm border-b border-neutral-100 dark:border-neutral-800">
+<header class="fixed top-0 left-0 right-0 z-50 bg-background border-b-2 border-border">
   <nav class="max-w-[1400px] mx-auto h-16 flex items-center justify-between px-6 md:px-10 lg:px-16">
     <!-- Logo — editorial masthead feel -->
-    <a href="/" class="flex items-center gap-3 hover:opacity-70 transition-opacity duration-300" aria-label={SITE_TITLE}>
+    <a href="/" class="flex items-center gap-3 hover:opacity-70 transition-opacity duration-200" aria-label={SITE_TITLE}>
       <img src="/logo.svg" alt={SITE_TITLE} class="h-10 w-auto" />
     </a>
 
@@ -25,32 +25,26 @@ function isActive(pathname: string, href: string): boolean {
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class={`relative px-3 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-colors duration-300 ${
+          class={`relative px-4 py-2 font-sans text-xs uppercase tracking-[0.15em] transition-all duration-200 border-2 ${
             isActive(Astro.url.pathname, link.href)
-              ? 'text-black dark:text-white'
-              : 'text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white'
+              ? 'bg-foreground text-background border-border'
+              : 'bg-transparent text-foreground border-transparent hover:border-border hover:bg-surface'
           }`}
         >
           {link.label}
-          {isActive(Astro.url.pathname, link.href) && (
-            <span class="absolute bottom-0 left-3 right-3 h-px bg-accent transition-all duration-300" />
-          )}
         </a>
       ))}
 
       <!-- Search icon button -->
       <a
         href="/search"
-        class="w-9 h-9 rounded-md flex items-center justify-center text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors duration-300"
+        class="w-10 h-10 flex items-center justify-center text-foreground border-2 border-border hover:bg-surface transition-all duration-200"
         aria-label="Search"
       >
         <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </a>
-
-      <!-- Divider -->
-      <div class="w-px h-4 bg-neutral-200 dark:bg-neutral-800 mx-3" />
 
       <!-- Theme toggle — minimal icon only -->
       <ThemeToggle />
