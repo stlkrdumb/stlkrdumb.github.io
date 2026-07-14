@@ -45,10 +45,10 @@ if (!headings || headings.length === 0) {
       tocLinks.forEach((link) => {
         const href = link.getAttribute('href');
         if (href && currentHeading && href === `#${currentHeading.id}`) {
-          link.classList.add('text-accent', 'dark:text-accent', 'border-accent', 'dark:border-accent');
+          link.classList.add('text-accent', 'border-accent');
           link.classList.remove('text-muted', 'dark:text-muted', 'border-transparent');
         } else {
-          link.classList.remove('text-accent', 'dark:text-accent', 'border-accent', 'dark:border-accent');
+          link.classList.remove('text-accent', 'border-accent');
           link.classList.add('text-muted', 'dark:text-muted', 'border-transparent');
         }
       });
