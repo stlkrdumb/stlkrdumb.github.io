@@ -4,7 +4,7 @@
 export const SITE_TITLE = 'byrai';
 export const SITE_DESCRIPTION = 'Personal blog and journal';
 export const SITE_URL = 'https://byrai.xyz';
-export const SITE_AUTHOR = 'byrai';
+export const SITE_AUTHOR = 'Rai';
 export const SITE_LANG = 'en';
 
 export const SOCIAL_LINKS = {
